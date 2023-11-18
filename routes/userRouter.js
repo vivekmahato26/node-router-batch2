@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const { getUsers, register, login } = require("../controllers/userController");
+const { getUsers, register, login, verify_email } = require("../controllers/userController");
 
 const userRouter = Router();
 
@@ -33,5 +33,16 @@ userRouter.post("/login", async(req,res) => {
         res.send({error: error.message})
     }
 })
+
+userRouter.get("/verify_email/:token", async(req,res) => {
+    try {
+        const data = await verify_email(req);
+        res.send(data);
+     } catch (error) {
+         console.log(error);
+         res.send({error: error.message})
+     }
+})
+
 
 module.exports = userRouter;
