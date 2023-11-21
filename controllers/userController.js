@@ -25,7 +25,8 @@ const register = async (req) => {
     JSON.stringify({
       expiry: date.getTime() + 24 * 3600 * 1000,
       userId: data.insertedId,
-    })
+    }),
+    process.env.CRYPTO_SECRET
   ).toString();
   sendMail(
     email,
@@ -97,7 +98,8 @@ const forgetPassword = async (req) => {
     JSON.stringify({
       expiry: date.getTime() + 24 * 3600 * 1000,
       userId: userData._id,
-    })
+    }),
+    process.env.CRYPTO_SECRET
   ).toString();
   sendMail(
     email,
